@@ -14,6 +14,9 @@ namespace checkZVsem
 
         public static string _startupPath = "";
         private static string _datevpp = "";
+        private static int _return = 0;
+
+
         static void Main(string[] args)
         {
 
@@ -62,7 +65,7 @@ namespace checkZVsem
 
             Console.WriteLine($"{file.Name}, {ts.Hours}");
 
-            if (args.Length < 1)  // Warning : Index was out of the bounds of the array
+            if (args.Length < 1)  
             {
                 //
             }
@@ -71,6 +74,8 @@ namespace checkZVsem
                 if(ts.Hours > Int32.Parse(args[0]))
                 {
                     Console.WriteLine($"ERROR: last access to old");
+
+                    _return = ts.Hours;
 
                     using (EventLog eventLog = new EventLog("Application"))
                     {
@@ -83,7 +88,7 @@ namespace checkZVsem
 
 
 
-            Environment.Exit(ts.Hours);
+            Environment.Exit(_return);
 
         }
 
