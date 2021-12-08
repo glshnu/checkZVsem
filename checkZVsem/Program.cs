@@ -61,9 +61,9 @@ namespace checkZVsem
             // Check ToCtrl.sem 
 
             var file = new FileInfo(Path.Combine(GetDpPathMap(), @"DATEN\ZVKW\BESTAND\STANDARD\ToCtrl.sem"));
-            TimeSpan ts = DateTime.Now - file.LastWriteTime;
+            TimeSpan ts = DateTime.Now - file.LastAccessTime;
 
-            Console.WriteLine($"{file.Name}, {ts.Hours}");
+            Console.WriteLine($"{file.FullName}, {ts.Hours}");
 
             if (args.Length < 1)  
             {
