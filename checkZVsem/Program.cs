@@ -63,7 +63,7 @@ namespace checkZVsem
             var file = new FileInfo(Path.Combine(GetDpPathMap(), @"DATEN\ZVKW\BESTAND\STANDARD\ToCtrl.sem"));
             TimeSpan ts = DateTime.Now - file.LastAccessTime;
 
-            Console.WriteLine($"{file.FullName}, {ts.Hours}");
+            Console.WriteLine($"{file.FullName}, {ts.TotalHours}");
 
             if (args.Length < 1)  
             {
@@ -71,7 +71,7 @@ namespace checkZVsem
             }
             else
             {
-                if(ts.Hours > Int32.Parse(args[0]))
+                if(ts.TotalHours > Int32.Parse(args[0]))
                 {
                     Console.WriteLine($"ERROR: last access to old");
 
@@ -80,7 +80,7 @@ namespace checkZVsem
                     using (EventLog eventLog = new EventLog("Application"))
                     {
                         eventLog.Source = "Application";
-                        eventLog.WriteEntry($"{file.FullName} last access to old - Hours:{ts.Hours} > {Int32.Parse(args[0])}", EventLogEntryType.Error, 2111, 1);
+                        eventLog.WriteEntry($"{file.FullName} last access to old - Hours:{ts.TotalHours} > {Int32.Parse(args[0])}", EventLogEntryType.Error, 2111, 1);
                     }
 
                 }
